@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
-function App() {
+function TodoList() {
+  const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")));
+  const [newTodo, setNewTodo] = useState("");
+
+  useEffect(() => {
+    const savedTodos = localStorage.getItem("todos");
+    if (savedTodos) {
+      setTodos(JSON.parse(savedTodos));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  function addTodo() {
+    setTodos([...todos, newTodo]);
+    setNewTodo("");
+  }
+
+  function handleChange(event) {
+    setNewTodo(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    addTodo();
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Minha Lista de Tarefas</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={newTodo} onChange={handleChange} />
+        <button type="submit">Adicionar Tarefa</button>
+      </form>
+      <ul>
+        {todos.map((todo, index) => (
+          <li key={index}>{todo}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default App;
+export default TodoList;
