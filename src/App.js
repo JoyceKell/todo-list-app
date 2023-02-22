@@ -1,10 +1,11 @@
 import React from "react";
 import TodoList from "./components/TodoList";
+import Router from "./Route/Router";
 
 function App() {
   return (
     <div>
-      <TodoList />
+      <Router />
     </div>
   );
 }
