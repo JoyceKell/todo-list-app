@@ -30,6 +30,12 @@ function TodoList() {
     addTodo();
   }
 
+  function handleDeleteTodo(index) {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  }
+
   return (
     <div className="flex-col h-screen flex items-center justify-center">
       <h1 className="pb-8 text-5xl text-gray-700">To-Do List</h1>
@@ -41,7 +47,7 @@ function TodoList() {
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
-              for="username"
+              htmlFor="username"
             >
               Adicionar Tarefa
             </label>
@@ -67,8 +73,15 @@ function TodoList() {
       <ul>
         {todos.map((todo, index) => (
           <li className="flex items-center justify-between w-72" key={index}>
-            <span>{todo}</span>
-            <button>Editar</button>
+            <div>
+              <span className="break-words">{todo}</span>
+            </div>
+            <div className="flex items-center justify-between w-24">
+              <Link to={`/putList/${index}`}>Editar</Link>
+              <button className="" onClick={() => handleDeleteTodo(index)}>
+                Excluir
+              </button>
+            </div>
           </li>
         ))}
       </ul>

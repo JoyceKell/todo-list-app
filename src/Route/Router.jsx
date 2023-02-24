@@ -8,6 +8,10 @@ function Router() {
       path: "/",
       element: <TodoList />,
     },
+    {
+      path: "/putList/:index",
+      element: <PutList />,
+    },
   ]);
 
   return (
