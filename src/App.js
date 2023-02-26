@@ -4,7 +4,7 @@ import Router from "./Route/Router";
 
 function App() {
   return (
-    <div>
+    <div className="bg-sky-50">
       <Router />
     </div>
   );

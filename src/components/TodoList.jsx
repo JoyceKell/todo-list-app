@@ -37,22 +37,24 @@ function TodoList() {
   }
 
   return (
-    <div className="flex-col h-screen flex items-center justify-center">
-      <h1 className="pb-8 text-5xl text-gray-700">To-Do List</h1>
-      <div className="w-full max-w-xs">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-blue-500 mb-6">
+        To-Do <span className="text-blue-600 dark:text-blue-500">List</span>
+      </h1>
+      <div className="max-w-sm w-full">
         <form
           onSubmit={handleSubmit}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
           <div className="mb-4">
             <label
-              className="block text-gray-700 text-sm font-bold mb-2"
+              className="block text-blue-500 text-sm font-bold mb-2"
               htmlFor="username"
             >
               Adicionar Tarefa
             </label>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline text-blue-500"
               type="text"
               value={newTodo}
               onChange={handleChange}
@@ -70,15 +72,26 @@ function TodoList() {
         </form>
       </div>
 
-      <ul>
+      <ul className="overflow-y-auto h-48 max-w-md w-full">
         {todos.map((todo, index) => (
-          <li className="flex items-center justify-between w-72" key={index}>
-            <div>
-              <span className="break-words">{todo}</span>
+          <li
+            className="flex items-center justify-between py-2 border-b border-blue-400"
+            key={index}
+          >
+            <div className="w-3/4">
+              <span className="break-words text-blue-500">{todo}</span>
             </div>
-            <div className="flex items-center justify-between w-24">
-              <Link to={`/putList/${index}`}>Editar</Link>
-              <button className="" onClick={() => handleDeleteTodo(index)}>
+            <div className="w-1/4 flex justify-end">
+              <Link
+                className="text-sky-600 hover:underline hover:text-sky-500 font-bold py-2 px-4 rounded-full"
+                to={`/putList/${index}`}
+              >
+                Editar
+              </Link>
+              <button
+                className="text-red-500 hover:underline hover:text-red-400 font-bold py-2 px-4 rounded-full"
+                onClick={() => handleDeleteTodo(index)}
+              >
                 Excluir
               </button>
             </div>
